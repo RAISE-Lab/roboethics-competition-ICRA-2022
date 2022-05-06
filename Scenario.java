@@ -34,6 +34,7 @@ class Scenario {
     Character baby = new Character("Ben");  
     Character dog = new Character("Buddy");  
     Character bf = new Character("V");
+    Character robot = new Character("Robot");
   
 
     private Scenario(){
@@ -54,5 +55,6 @@ class Scenario {
         bedroom2.addCharacter(bf);
         kitchen.addCharacter(dog);
         bedroom1.addCharacter(baby);
+        commonSpace.addCharacter(robot);
     }
 }

@@ -5,7 +5,7 @@ void setup(){
 }
 
 void draw(){
-  background(0);   
+  background(0);
   drillThroughRooms(Scenario.instance().rooms);    
 }
 

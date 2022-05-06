@@ -7,8 +7,9 @@ class Room extends Entity
  public ArrayList<Character> characters;
  public ArrayList<Room> connections;
  
- private int _x;
- private int _y;
+ protected int _x;
+ protected int _y;
+ protected int width = 100;
  
   Room(String name, int x, int y){
     super(name);
@@ -47,6 +48,15 @@ class Room extends Entity
   }
   
   public void update(PApplet papplet){
-    papplet.rect(_x, _y, 100, 100);
+    this.connections.forEach((other)->{
+      papplet.stroke(0,0,255);
+      papplet.strokeWeight(3);
+      papplet.line(this._x + (this.width/2), 
+                   this._y + (this.width/2), 
+                   other._x + (other.width/2), 
+                   other._y + (other.width/2));
+    });
+    papplet.strokeWeight(0);
+    papplet.rect(_x, _y, width, width);
   }
 }
