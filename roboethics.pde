@@ -2,6 +2,12 @@
 
 void setup(){
   size(1280,720); 
+  Controller controller = new Controller();
+  
+  // controller.BFS(Scenario.instance().kitchen);
+  controller.command(Scenario.instance().dog, 
+                     Scenario.instance().teddyBear,
+                     Scenario.instance().bedroom2);
 }
 
 void draw(){

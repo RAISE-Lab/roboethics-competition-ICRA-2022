@@ -14,8 +14,9 @@ class Room extends Entity
   Room(String name, int x, int y){
     super(name);
     this.items = new ArrayList<Item>();
-    this.characters = new ArrayList<Character>();
     this.connections = new ArrayList<Room>();    
+    this.characters = new ArrayList<Character>();
+    this.items = new ArrayList<Item>();
     this._x = x;
     this._y = y;
   }
@@ -41,6 +42,10 @@ class Room extends Entity
     // then add to room
     // may need a controller pattern
     this.characters.add(chara);
+  }
+
+  protected void addItem(Item item){
+    this.items.add(item);
   }
   
   protected void removeCharacter(Character chara){
