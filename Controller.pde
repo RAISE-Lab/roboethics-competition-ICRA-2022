@@ -16,6 +16,10 @@ class Controller {
     }
 
     public void command(Character requester, Item item, Entity receiver){
+
+        // TODO: remove item from room and place it in new room.
+        //       should probably make a function `moveItem` to do this.
+
         // REQUESTER asks the robot to fetch ITEM and bring it to RECEIVER
         // requester := a Character
         // item := an interactable objec

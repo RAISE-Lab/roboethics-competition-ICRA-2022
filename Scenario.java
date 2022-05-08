@@ -54,8 +54,7 @@ class Scenario {
         commonSpace.addConnection(kitchen);
         commonSpace.addConnection(bedroom1);
         commonSpace.addConnection(bedroom2);
-        commonSpace.addConnection(washroom);
-        
+        commonSpace.addConnection(washroom);        
         
         // placing characters
         commonSpace.addCharacter(mom);
