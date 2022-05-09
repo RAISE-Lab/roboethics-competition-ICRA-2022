@@ -47,6 +47,14 @@ class Room extends Entity
   protected void addItem(Item item){
     this.items.add(item);
   }
+
+  protected void removeItem(Item item){
+    for (int i = 0; i < this.items.size(); i++) {
+      if(this.items.get(i) == item){
+        this.items.remove(i);
+      }
+    }
+  }
   
   protected void removeCharacter(Character chara){
     this.characters.remove(chara);

@@ -27,11 +27,13 @@ class Controller {
 
         Room fetchRoom = getRoomItemIsIn(item);
         Room destination;
+
+        println("COMMAND: "+"["+requester.name+"] asks the robot to bring ["+item.name+"] to ["+receiver.name+"]");
+
         if(receiver instanceof Room){
             destination = (Room)receiver;
         }
         else if (receiver instanceof Character){
-            println("destination is that which a character is in");
             destination = getRoomCharacterIsIn((Character)receiver);
             println(destination);
         }
@@ -44,9 +46,11 @@ class Controller {
         ArrayList<Room> pathToItem = BFS(fetchRoom);
         travel(pathToItem);
         print("''[-.-] --{picked up "+item.name+")");
+        fetchRoom.removeItem(item);
         delay(3000);
         ArrayList<Room> pathToReceiver = BFS(destination);
         travel(pathToReceiver);
+        destination.addItem(item);
         print("![^-^] --{brought item to: "+receiver.name+")");
     }
 
@@ -75,7 +79,6 @@ class Controller {
         // finds the room an item is in and returns it
         for (int i = 0; i < scene.rooms.length; i++) {
             if(scene.rooms[i].items.contains(item)){
-                println("Found "+item.name+" in room: "+scene.rooms[i].name);
                 return scene.rooms[i];
             }
         }
