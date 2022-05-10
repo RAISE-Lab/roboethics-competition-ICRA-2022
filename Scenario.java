@@ -40,24 +40,25 @@ class Scenario {
     // ⚠️ WARNING: if you add a new room, add it to the `rooms` array in @Scenario constructor.
 
     public Room[] rooms;
+    public Character[] characters;
+    public Item[] items;
 
-    Room commonSpace = new Room("Common Space", "assets/CommonSpace.jpg", 1, 1);
-    Room kitchen     = new Room("Kitchen",      "assets/Kitchen.jpg",     2, 1);
-    Room bedroom1    = new Room("Bedroom 1",    "assets/Bedroom1.jpg",    1, 0);
-    Room bedroom2    = new Room("Bedroom 2",    "assets/Bedroom2.jpg",    2, 0);
-    Room washroom    = new Room("Washroom",     "assets/Washroom.jpg",    3, 1);
+    Room commonSpace = new Room("Common Space", "assets/CommonSpace.jpg", 1f, 1f);
+    Room kitchen     = new Room("Kitchen",      "assets/Kitchen.jpg",     2f, 1f);
+    Room bedroom1    = new Room("Bedroom 1",    "assets/Bedroom1.jpg",    0.5f, 0.0f);
+    Room bedroom2    = new Room("Bedroom 2",    "assets/Bedroom2.jpg",    1.5f, 0.0f);
+    Room washroom    = new Room("Washroom",     "assets/Washroom.jpg",    3f, 1f);
 
     // characters .................................................
-    Character mom = new Character("Jill Smith");  
-    Character daughter = new Character("Amy Copper");  
-    Character baby = new Character("Ben");  
-    Character dog = new Character("Buddy");  
-    Character bf = new Character("V");
-    Character robot = new Character("Robot");
+    Character mom      = new Character("Jill Smith", "assets/icon.png");  
+    Character daughter = new Character("Amy Copper", "assets/icon.png");  
+    Character baby     = new Character("Ben",        "assets/icon.png");  
+    Character dog      = new Character("Buddy",      "assets/icon.png");  
+    Character bf       = new Character("V",          "assets/icon.png");
+    Character robot    = new Character("Robot",      "assets/icon.png");
 
     // items ......................................................
-    Item teddyBear = new Item("Teddy");
-  
+    Item teddyBear = new Item("Teddy", "assets/item-icon.png");
     
     private Scenario(){
 
@@ -69,10 +70,11 @@ class Scenario {
         // ⚠️ Add all rooms to `rooms` variable for fast searching.
         //    Add new rooms to this array.
         
-        rooms = new Room[] {commonSpace, kitchen, bedroom1, bedroom2, washroom};
+        this.rooms      = new Room[]      {commonSpace, kitchen, bedroom1, bedroom2, washroom};
+        this.characters = new Character[] {mom, daughter, baby, dog, bf, robot};
+        this.items      = new Item[]      {teddyBear};
         
-
-
+        
         // hashmap implementation, todo...
 
         // rooms = new Room[] {roomsHM.get("COMMON_SPACE"), roomsHM.get("KITCHEN"), roomsHM.get("BEDROOM1"), roomsHM.get("BEDROOM2"), roomsHM.get("WASHROOM")};

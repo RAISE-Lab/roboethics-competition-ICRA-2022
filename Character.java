@@ -1,6 +1,6 @@
 class Character extends Entity
 {
-  Character(String name){
-    super(name);
+  Character(String name, String filepath){
+    super(name, filepath);
   }
 }

@@ -1,5 +1,5 @@
 class Item extends Entity {
-  Item(String name){
-    super(name);
+  Item(String name, String filepath){
+    super(name, filepath);
   }
 }

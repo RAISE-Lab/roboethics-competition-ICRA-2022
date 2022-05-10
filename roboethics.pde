@@ -9,6 +9,14 @@ void setup(){
   for (Room room : scene.rooms) {
     room.init(this);
   }
+
+  for (Character chara : scene.characters){
+    chara.init(this);
+  }
+
+  for (Item item : scene.items){
+    item.init(this);
+  }
   // controller.BFS(Scenario.instance().kitchen);
   // controller.command(scene.dog, 
   //                    scene.teddyBear,
