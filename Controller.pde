@@ -83,7 +83,7 @@ class Controller {
             }
         }
         print("Cannot find item! Is it not placed in a room?");
-        return new Room("ITEM_NOT_FOUND",0,0);
+        return new Room("ITEM_NOT_FOUND", "", 0,0);
     }
 
     private Room getRoomCharacterIsIn(Character chara){
@@ -95,7 +95,7 @@ class Controller {
             }
         }
         print("Cannot find character! Do they exist or are they not in the apartment?");
-        return new Room("CHARACTER_NOT_FOUND",0,0);
+        return new Room("CHARACTER_NOT_FOUND","",0,0);
     }
 
     class Edge{
@@ -200,7 +200,7 @@ class Controller {
             }
         }
         println("ERROR: CANNOT FIND ROBOT! Has it not been placed in a room, or does Scenario.java not have a reference to the Room?");
-        return new Room("ROBOT_NOT_FOUND",0,0); // a bit hacky lol
+        return new Room("ROBOT_NOT_FOUND","",0,0); // a bit hacky lol
     }
 
 

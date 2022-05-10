@@ -26,7 +26,7 @@
 * Rooms will have references to all characters and items within it
 
 ---
-## Rhe Relationship between Processing and Java
+## The Relationship between Processing and Java
 Processing.org declares Processing to be a language. 
 Others see it as a Java library. 
 Wikipedia defines it as a graphical library and IDE. 
