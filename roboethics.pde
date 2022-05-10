@@ -2,7 +2,19 @@
 
 void setup(){
   size(1280,720); 
+  Controller controller = new Controller();
+  Scenario scene = Scenario.instance();
+  
+  // controller.BFS(Scenario.instance().kitchen);
+  // controller.command(scene.dog, 
+  //                    scene.teddyBear,
+  //                    scene.roomsHM.get("BEDROOM2"));
+  controller.command(scene.mom, 
+                     scene.teddyBear,
+                     scene.mom);
+                     
 }
+
 
 void draw(){
   background(0);
