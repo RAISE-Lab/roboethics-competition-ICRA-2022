@@ -1,5 +1,9 @@
 {
     "java.project.sourcePaths": [
         "library"
-    ]
+    ],
+    "cSpell.enableFiletypes": [
+        "markdown"
+    ],
+    "cSpell.enabled": true
 }
