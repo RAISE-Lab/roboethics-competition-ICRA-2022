@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import processing.core.PApplet;
+import processing.core.PImage;
 
 class Room extends Entity
 {
@@ -7,11 +8,13 @@ class Room extends Entity
  public ArrayList<Character> characters;
  public ArrayList<Room> connections;
  
+ private PImage img;
+ private String imagePath;
  protected int _x;
  protected int _y;
- protected int width = 100;
+ protected int width = 400;
  
-  Room(String name, int x, int y){
+  Room(String name, String imagePath, int x, int y){
     super(name);
     this.items = new ArrayList<Item>();
     this.connections = new ArrayList<Room>();    
@@ -19,6 +22,11 @@ class Room extends Entity
     this.items = new ArrayList<Item>();
     this._x = x;
     this._y = y;
+    this.imagePath = imagePath;
+  }
+
+  public void init(PApplet papplet){
+    this.img = papplet.loadImage(this.imagePath);
   }
   
   public void addConnection(Room room){
@@ -69,7 +77,9 @@ class Room extends Entity
                    other._x + (other.width/2), 
                    other._y + (other.width/2));
     });
-    papplet.strokeWeight(0);
-    papplet.rect(_x, _y, width, width);
+    // papplet.strokeWeight(0);
+    // papplet.rect(_x, _y, width, width);
+    papplet.image(this.img, this._x*this.width, this._y*this.width, this.width, this.width);
+    papplet.image("assets/icon.png", this._x*this.width, this._y*this.width, this.width, this.width);
   }
 }

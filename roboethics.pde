@@ -1,27 +1,31 @@
 // `Scenario` is a singleton object with global scope that defines the scene
 
+
 void setup(){
-  size(1280,720); 
+  size(1920,1080); 
   Controller controller = new Controller();
   Scenario scene = Scenario.instance();
-  
+
+  for (Room room : scene.rooms) {
+    room.init(this);
+  }
   // controller.BFS(Scenario.instance().kitchen);
   // controller.command(scene.dog, 
   //                    scene.teddyBear,
   //                    scene.roomsHM.get("BEDROOM2"));
-  controller.command(scene.mom, 
-                     scene.teddyBear,
-                     scene.mom);
+  // controller.command(scene.mom, 
+  //                    scene.teddyBear,
+  //                    scene.mom);
                      
 }
 
 
 void draw(){
   background(0);
-  drillThroughRooms(Scenario.instance().rooms);    
+  updateRooms(Scenario.instance().rooms);    
 }
 
-void drillThroughRooms(Room[] rooms){
+void updateRooms(Room[] rooms){
     for (int i = 0 ; i < rooms.length ; i++){      
       rooms[i].update(this);
     }

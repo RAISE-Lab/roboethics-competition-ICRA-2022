@@ -41,11 +41,11 @@ class Scenario {
 
     public Room[] rooms;
 
-    Room commonSpace = new Room("Common Space", 300, 300);
-    Room kitchen     = new Room("Kitchen",      500, 300);
-    Room bedroom1    = new Room("Bedroom 1",    300, 500);
-    Room bedroom2    = new Room("Bedroom 2",    500, 500);
-    Room washroom    = new Room("Washroom",     800, 100);
+    Room commonSpace = new Room("Common Space", "assets/CommonSpace.jpg", 1, 1);
+    Room kitchen     = new Room("Kitchen",      "assets/Kitchen.jpg",     2, 1);
+    Room bedroom1    = new Room("Bedroom 1",    "assets/Bedroom1.jpg",    1, 0);
+    Room bedroom2    = new Room("Bedroom 2",    "assets/Bedroom2.jpg",    2, 0);
+    Room washroom    = new Room("Washroom",     "assets/Washroom.jpg",    3, 1);
 
     // characters .................................................
     Character mom = new Character("Jill Smith");  
@@ -68,6 +68,7 @@ class Scenario {
 
         // ⚠️ Add all rooms to `rooms` variable for fast searching.
         //    Add new rooms to this array.
+        
         rooms = new Room[] {commonSpace, kitchen, bedroom1, bedroom2, washroom};
         
 
