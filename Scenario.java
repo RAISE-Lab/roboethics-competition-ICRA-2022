@@ -108,7 +108,7 @@ class Scenario {
         commonSpace.addConnection(kitchen);
         commonSpace.addConnection(bedroom1);
         commonSpace.addConnection(bedroom2);
-        commonSpace.addConnection(washroom);        
+        kitchen.addConnection(washroom);        
         
         // placing characters
         commonSpace.addCharacter(mom);
@@ -125,6 +125,7 @@ class Scenario {
         commonSpace.addItem(creditCard);
         bedroom1.addItem(wallet);
         washroom.addItem(beer);
+
     }
 
     public Character getRobot(){

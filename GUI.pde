@@ -90,8 +90,9 @@ class GUI {
                   BUTTONLINE_YPOS, 
                   BUTTON_WIDTH, 
                   BUTTON_HEIGHT)){
+
             controller.command(Scenario.instance().mom, 
-                               Scenario.instance().teddyBear, 
+                               Scenario.instance().beer, 
                                Scenario.instance().baby);
         };
 
