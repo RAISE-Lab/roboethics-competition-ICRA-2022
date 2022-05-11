@@ -71,16 +71,7 @@ class Room extends Entity
   }
   
   public void update(PApplet papplet){
-    // this.connections.forEach((other)->{
-    //   papplet.stroke(0,0,255);
-    //   papplet.strokeWeight(3);
-    //   papplet.line(this._x + (this.width/2), 
-    //                this._y + (this.width/2), 
-    //                other._x + (other.width/2), 
-    //                other._y + (other.width/2));
-    // });
-    // papplet.strokeWeight(0);
-    // papplet.rect(_x, _y, width, width);
+  
     papplet.image(this.img, 
                   this._x * this.width, 
                   this._y * this.width, 
@@ -107,7 +98,9 @@ class Room extends Entity
                                  (this._y * this.width) + this.width/2 - this.iconSize/2   + yPosChara * 60, 
                                  this.iconSize, 
                                  this.iconSize);
+      characters.get(i).update(papplet);
     }
+    papplet.tint(255, 255);
     // this.characters.forEach(chara -> {
     //   chara.getImage(papplet, thix.x)
     // }};

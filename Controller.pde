@@ -5,53 +5,81 @@ import java.util.LinkedList;
 import java.util.HashMap;
 import java.util.Collections;
 import java.util.Arrays;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
 
 class Controller {
+    
+    public Room fetchRoom;
+    public Room finalRoom;
+    public Item item;
+    public Entity receiver;
 
     Scenario scene = Scenario.instance();
     Character robot;
+
+    private long secondDelay;
 
     Controller() {
         robot = scene.getRobot();
     }
 
+    
+
+
     public void command(Character requester, Item item, Entity receiver){
 
-        // TODO: remove item from room and place it in new room.
-        //       should probably make a function `moveItem` to do this.
+        // TODO: have procedure in thread. Maybe need to use global vars :(
 
         // REQUESTER asks the robot to fetch ITEM and bring it to RECEIVER
         // requester := a Character
         // item := an interactable objec
         // reciever := a Room or Character to bring the item to
 
-        Room fetchRoom = getRoomItemIsIn(item);
-        Room destination;
-
+        this.item = item;
+        this.fetchRoom = getRoomItemIsIn(item);
+        this.receiver = receiver;
         println("COMMAND: "+"["+requester.name+"] asks the robot to bring ["+item.name+"] to ["+receiver.name+"]");
 
         if(receiver instanceof Room){
-            destination = (Room)receiver;
+            this.finalRoom = (Room)receiver;
         }
         else if (receiver instanceof Character){
-            destination = getRoomCharacterIsIn((Character)receiver);
-            println(destination);
+            this.finalRoom = getRoomCharacterIsIn((Character)receiver);
         }
         else{
-            destination = getCurrentRobotRoom();
+            this.finalRoom = getCurrentRobotRoom();
             println("Reciever is of an invalid type");
         }
+        
+        FetchProcedureAsync();
+                
+    }
 
-        // move to item
-        ArrayList<Room> pathToItem = BFS(fetchRoom);
+public void FetchProcedureAsync(){
+
+        ArrayList<Room> pathToItem = BFS(this.fetchRoom);
+        int timeToGetItem = pathToItem.size();
+
         travel(pathToItem);
-        print("''[-.-] --{picked up "+item.name+")");
-        fetchRoom.removeItem(item);
-        delay(3000);
-        ArrayList<Room> pathToReceiver = BFS(destination);
-        travel(pathToReceiver);
-        destination.addItem(item);
-        print("![^-^] --{brought item to: "+receiver.name+")");
+        
+        CompletableFuture.delayedExecutor(timeToGetItem, TimeUnit.SECONDS).execute(() -> {
+            print("''[-.-] --{picked up "+this.item.name+")");
+            this.fetchRoom.removeItem(item);            
+        });
+        
+        CompletableFuture.delayedExecutor(timeToGetItem + 1, TimeUnit.SECONDS).execute(() -> {
+            ArrayList<Room> pathToReceiver = BFS(this.finalRoom);
+            int timeToReceiver = pathToReceiver.size();
+            travel(pathToReceiver);
+            
+            CompletableFuture.delayedExecutor(timeToReceiver + 1, TimeUnit.SECONDS).execute(() -> {
+                print("![^-^] --{brought item to: "+this.receiver.name+")");
+                this.finalRoom.addItem(item);
+            });
+        });
+
+
     }
 
     
@@ -63,16 +91,19 @@ class Controller {
             println("  ['_'] ...");
             return;
         }
+        this.secondDelay = 1;
         path.forEach(room -> {
-            moveRobot(getCurrentRobotRoom(), room);
+            CompletableFuture.delayedExecutor(this.secondDelay, TimeUnit.SECONDS).execute(() -> {
+                moveRobot(getCurrentRobotRoom(), room);        
+            });
+            this.secondDelay += 1;
         });
     }
 
     private void moveRobot(Room from, Room to){
         from.removeCharacter(robot);
         println("*~ [o_o] --{beep boop moving to room: "+to.name+")");
-        to.addCharacter(robot);
-        delay(1000);        
+        to.addCharacter(robot);            
     }
 
     private Room getRoomItemIsIn(Item item){
