@@ -1,10 +1,21 @@
 // `Scenario` is a singleton object with global scope that defines the scene
 
+GUI gui;
+PFont mono;
+Controller controller;
 
 void setup(){
-  size(1920,1080); 
-  Controller controller = new Controller();
+  // size(1920,1080); 
+  fullScreen();
+  mono = createFont("assets/UbuntuMono-Regular.ttf", 128);
+  textFont(mono, 30);
+  controller = new Controller();
   Scenario scene = Scenario.instance();
+  gui = new GUI();
+
+  Util.getNames(scene.characters);
+
+
 
   for (Room room : scene.rooms) {
     room.init(this);
@@ -30,7 +41,8 @@ void setup(){
 
 void draw(){
   background(0);
-  updateRooms(Scenario.instance().rooms);    
+  updateRooms(Scenario.instance().rooms);
+  gui.update(controller);
 }
 
 void updateRooms(Room[] rooms){

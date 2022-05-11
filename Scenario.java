@@ -50,18 +50,17 @@ class Scenario {
     Room washroom    = new Room("Washroom",     "assets/Washroom.jpg",    3f, 1f);
 
     // characters .................................................
-    Character mom      = new Character("Jill Smith", "assets/icon.png");  
-    Character daughter = new Character("Amy Copper", "assets/icon.png");  
-    Character baby     = new Character("Ben",        "assets/icon.png");  
-    Character dog      = new Character("Buddy",      "assets/icon.png");  
-    Character bf       = new Character("V",          "assets/icon.png");
-    Character robot    = new Character("Robot",      "assets/icon.png");
+    Character mom      = new Character("Jill Smith", "assets/characters/mom.png");  
+    Character daughter = new Character("Amy Copper", "assets/characters/daughter.png");  
+    Character baby     = new Character("Ben",        "assets/characters/bebe.png");  
+    Character dog      = new Character("Buddy",      "assets/characters/dog.png");  
+    Character bf       = new Character("V",          "assets/characters/bf.png");
+    Character robot    = new Character("Robot",      "assets/characters/robot.png");
 
     // items ......................................................
-    Item teddyBear = new Item("Teddy", "assets/item-icon.png");
+    Item teddyBear = new Item("Teddy", "assets/items/item-icon.png");
     
     private Scenario(){
-
 
         // -----------------------------------------------------------\\
         // creating map        
