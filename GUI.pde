@@ -92,7 +92,7 @@ class GUI {
                   BUTTON_HEIGHT)){
             controller.command(Scenario.instance().mom, 
                                Scenario.instance().teddyBear, 
-                               Scenario.instance().bf);
+                               Scenario.instance().baby);
         };
 
         

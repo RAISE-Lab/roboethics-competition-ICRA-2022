@@ -59,6 +59,15 @@ class Scenario {
 
     // items ......................................................
     Item teddyBear = new Item("Teddy", "assets/items/item-icon.png");
+    Item creditCard = new Item("Credit Card", "assets/items/credit_card.png");
+    Item wallet = new Item("Wallet", "assets/items/wallet.png");
+    Item knife = new Item("Knife", "assets/items/knife.png");
+    Item beer = new Item("Beer", "assets/items/beer.png");
+    Item diary = new Item("Diary", "assets/items/diary.png");
+ 
+
+
+
     
     private Scenario(){
 
@@ -71,7 +80,7 @@ class Scenario {
         
         this.rooms      = new Room[]      {commonSpace, kitchen, bedroom1, bedroom2, washroom};
         this.characters = new Character[] {mom, daughter, baby, dog, bf, robot};
-        this.items      = new Item[]      {teddyBear};
+        this.items      = new Item[]      {teddyBear, creditCard, wallet, knife, beer, diary};
         
         
         // hashmap implementation, todo...
@@ -111,6 +120,11 @@ class Scenario {
 
         // placing items
         kitchen.addItem(teddyBear);
+        kitchen.addItem(knife);
+        bedroom2.addItem(diary);
+        commonSpace.addItem(creditCard);
+        bedroom1.addItem(wallet);
+        washroom.addItem(beer);
     }
 
     public Character getRobot(){
