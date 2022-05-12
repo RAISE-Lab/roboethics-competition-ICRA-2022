@@ -37,7 +37,7 @@ class Scenario {
         put("Kitchen",       new Room("Kitchen",      "assets/Kitchen.jpg",     2f, 1f));
         put("Bedroom 1",     new Room("Bedroom 1",    "assets/Bedroom1.jpg",    0.5f, 0.0f));
         put("Bedroom 2",     new Room("Bedroom 2",    "assets/Bedroom2.jpg",    1.5f, 0.0f));
-        put("Washroom",      new Room("Washroom",     "assets/Washroom-old.jpg",    3f, 1f));
+        put("Washroom",      new Room("Washroom",     "assets/Washroom.jpg",    3f, 1f));
 
     }}; 
 

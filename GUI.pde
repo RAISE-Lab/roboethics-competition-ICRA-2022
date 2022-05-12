@@ -16,9 +16,9 @@ class GUI {
     private int TEXTLINE_YPOS = height - (CONSOLE_HEIGHT/2) - (TEXT_SIZE/2);
     private int BUTTONLINE_YPOS = height - (CONSOLE_HEIGHT/2) - (BUTTON_HEIGHT/2) - (TEXT_SIZE/2);
 
-    private String currentRequester = "REQUESTER";
-    private String currentTarget = "ITEM";
-    private String currentReceiver = "RECEIVER";
+    private String currentRequester = "Amy Copper";
+    private String currentTarget = "Credit Card";
+    private String currentReceiver = "Jill Smith";
 
     private ArrayList<String> requesterOptions;
     private ArrayList<String> targetOptions;
@@ -29,8 +29,6 @@ class GUI {
     GUI(){
         this.requesterOptions = new ArrayList<String>(Scenario.instance().characters.keySet());
         this.targetOptions = new ArrayList<String>(Scenario.instance().items.keySet());
-        // Set<String> characters = Scenario.instance().characters.keySet();
-        // Set<String> rooms = Scenario.instance().rooms.keySet();
         this.receiverOptions = new ArrayList<String>();
         for (String characterName : Scenario.instance().characters.keySet()) {
             this.receiverOptions.add(characterName);
