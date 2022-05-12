@@ -9,11 +9,6 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 
 class Controller {
-    
-    public Room fetchRoom;
-    public Room finalRoom;
-    public Item item;
-    public Entity receiver;
 
     Scenario scene = Scenario.instance();
     Character robot;
@@ -36,9 +31,8 @@ class Controller {
         // item := an interactable objec
         // reciever := a Room or Character to bring the item to
 
-        this.item = item;
-        this.fetchRoom = getRoomItemIsIn(item);
-        this.receiver = receiver;
+        Room fetchRoom = getRoomItemIsIn(item);
+        Room finalRoom;
         println("command called with");
         println(requester);
         println(item);
@@ -47,40 +41,40 @@ class Controller {
         println("COMMAND: "+"["+requester.name+"] asks the robot to bring ["+item.name+"] to ["+receiver.name+"]");
 
         if(receiver instanceof Room){
-            this.finalRoom = (Room)receiver;
+            finalRoom = (Room)receiver;
         }
         else if (receiver instanceof Character){
-            this.finalRoom = getRoomCharacterIsIn((Character)receiver);
+            finalRoom = getRoomCharacterIsIn((Character)receiver);
         }
         else{
-            this.finalRoom = getCurrentRobotRoom();
+            finalRoom = getCurrentRobotRoom();
             println("Reciever is of an invalid type");
         }
         
-        FetchProcedureAsync();
+        FetchProcedureAsync(item, fetchRoom, finalRoom, receiver);
                 
     }
 
-public void FetchProcedureAsync(){
+public void FetchProcedureAsync(Item item, Room fetchRoom, Room finalRoom, Entity receiver){
 
-        ArrayList<Room> pathToItem = BFS(this.fetchRoom);
+        ArrayList<Room> pathToItem = BFS(fetchRoom);
         int timeToGetItem = pathToItem.size();
 
         travel(pathToItem);
         
         CompletableFuture.delayedExecutor(timeToGetItem, TimeUnit.SECONDS).execute(() -> {
-            print("''[-.-] --{picked up "+this.item.name+")");
-            this.fetchRoom.removeItem(item);            
+            print("''[-.-] --{picked up "+item.name+")");
+            fetchRoom.removeItem(item);            
         });
         
         CompletableFuture.delayedExecutor(timeToGetItem + 1, TimeUnit.SECONDS).execute(() -> {
-            ArrayList<Room> pathToReceiver = BFS(this.finalRoom);
+            ArrayList<Room> pathToReceiver = BFS(finalRoom);
             int timeToReceiver = pathToReceiver.size();
             travel(pathToReceiver);
             
             CompletableFuture.delayedExecutor(timeToReceiver + 1, TimeUnit.SECONDS).execute(() -> {
-                print("![^-^] --{brought item to: "+this.receiver.name+")");
-                this.finalRoom.addItem(item);
+                print("![^-^] --{brought item to: "+receiver.name+")");
+                finalRoom.addItem(item);
             });
         });
 
@@ -90,8 +84,6 @@ public void FetchProcedureAsync(){
     
 
     private void travel(ArrayList<Room> path){
-        // println("travel path: ");
-        // println(path);
         if (path.get(0) == getCurrentRobotRoom()){
             println("  ['_'] ...");
             return;

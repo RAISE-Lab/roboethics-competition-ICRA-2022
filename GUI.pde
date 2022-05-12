@@ -24,12 +24,11 @@ class GUI {
     private ArrayList<String> targetOptions;
     private ArrayList<String> receiverOptions;
 
-    // public int reciever;
-
     GUI(){
         this.requesterOptions = new ArrayList<String>(Scenario.instance().characters.keySet());
         this.targetOptions = new ArrayList<String>(Scenario.instance().items.keySet());
         this.receiverOptions = new ArrayList<String>();
+
         for (String characterName : Scenario.instance().characters.keySet()) {
             this.receiverOptions.add(characterName);
         }
@@ -76,16 +75,12 @@ class GUI {
                   BUTTONLINE_YPOS, 
                   BUTTON_WIDTH, 
                   BUTTON_HEIGHT)){
-
-
                       String selection = new UiBooster().showSelectionDialog(
                                                                     "Select receiver:",
                                                                     "Destination",
                                                                     this.receiverOptions
                                                                     );
             if(selection != null) currentReceiver = selection;
-
-            println("clickled");
         };
 
         if(Button("> Execute", 
@@ -97,7 +92,6 @@ class GUI {
             println("current requester: "+this.currentRequester);
             println("current target: "+this.currentTarget);
             println("current rec: "+this.currentReceiver);
-            
 
             controller.command(Scenario.instance().characters.get(this.currentRequester), 
                                Scenario.instance().items.get(this.currentTarget), 

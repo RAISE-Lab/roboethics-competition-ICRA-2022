@@ -45,12 +45,6 @@ class Room extends Entity
   }
   
   protected void addCharacter(Character chara){
-    
-    // TODO:
-    // scan all other rooms to make sure agent doesn't exist elsewhere
-    // if exists elsewhere, remove it from the room
-    // then add to room
-    // may need a controller pattern
     this.characters.add(chara);
   }
 
@@ -101,8 +95,5 @@ class Room extends Entity
       characters.get(i).update(papplet);
     }
     papplet.tint(255, 255);
-    // this.characters.forEach(chara -> {
-    //   chara.getImage(papplet, thix.x)
-    // }};
   }
 }
