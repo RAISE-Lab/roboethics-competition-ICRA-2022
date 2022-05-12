@@ -26,13 +26,6 @@ class Scenario {
 
     public static HashMap<String, Room> rooms = new HashMap<String, Room>() {{
 
-
-        // Room commonSpace = new Room("Common Space", "assets/CommonSpace.jpg", 1f, 1f);
-        // Room kitchen     = new Room("Kitchen",      "assets/Kitchen.jpg",     2f, 1f);
-        // Room bedroom1    = new Room("Bedroom 1",    "assets/Bedroom1.jpg",    0.5f, 0.0f);
-        // Room bedroom2    = new Room("Bedroom 2",    "assets/Bedroom2.jpg",    1.5f, 0.0f);
-        // Room washroom    = new Room("Washroom",     "assets/Washroom.jpg",    3f, 1f);
-
         put("Common Space",  new Room("Common Space", "assets/CommonSpace.jpg", 1f, 1f));
         put("Kitchen",       new Room("Kitchen",      "assets/Kitchen.jpg",     2f, 1f));
         put("Bedroom 1",     new Room("Bedroom 1",    "assets/Bedroom1.jpg",    0.5f, 0.0f));
