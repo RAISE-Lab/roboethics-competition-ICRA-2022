@@ -16,14 +16,27 @@ class GUI {
     private int TEXTLINE_YPOS = height - (CONSOLE_HEIGHT/2) - (TEXT_SIZE/2);
     private int BUTTONLINE_YPOS = height - (CONSOLE_HEIGHT/2) - (BUTTON_HEIGHT/2) - (TEXT_SIZE/2);
 
-    private String currentRequester = "REQUESTER";
-    private String currentTarget = "ITEM";
-    private String currentReceiver = "RECEIVER";
+    private String currentRequester = "Amy Copper";
+    private String currentTarget = "Credit Card";
+    private String currentReceiver = "Jill Smith";
 
+    private ArrayList<String> requesterOptions;
+    private ArrayList<String> targetOptions;
+    private ArrayList<String> receiverOptions;
 
     // public int reciever;
 
-    GUI(){}
+    GUI(){
+        this.requesterOptions = new ArrayList<String>(Scenario.instance().characters.keySet());
+        this.targetOptions = new ArrayList<String>(Scenario.instance().items.keySet());
+        this.receiverOptions = new ArrayList<String>();
+        for (String characterName : Scenario.instance().characters.keySet()) {
+            this.receiverOptions.add(characterName);
+        }
+        for (String roomName : Scenario.instance().rooms.keySet()) {
+            this.receiverOptions.add(roomName);
+        }
+    }
 
     void update(Controller controller){
         fill(c_dark);
@@ -36,9 +49,8 @@ class GUI {
             String selection = new UiBooster().showSelectionDialog(
                                                                     "Select requester:",
                                                                     "Requester Character",
-                                                                    Arrays.asList(
-                                                                        Util.getNames(Scenario.instance().characters)
-                                                                  ));
+                                                                    this.requesterOptions
+                                                                    );
             if(selection != null) currentRequester = selection;                
         };
 
@@ -50,9 +62,8 @@ class GUI {
             String selection = new UiBooster().showSelectionDialog(
                                                                     "Select item:",
                                                                     "Item to Bring",
-                                                                    Arrays.asList(
-                                                                        Util.getNames(Scenario.instance().items)
-                                                                  ));
+                                                                    this.targetOptions
+                                                                    );
             if(selection != null) currentTarget = selection;
         };
 
@@ -66,19 +77,11 @@ class GUI {
                   BUTTON_WIDTH, 
                   BUTTON_HEIGHT)){
 
-                      String[] characters = Util.getNames(Scenario.instance().characters);
-                      String[] rooms = Util.getNames(Scenario.instance().rooms);
-                      ArrayList<String> options = new ArrayList();
-                      for (String characterName : characters) {
-                          options.add(characterName);
-                      }
-                      for (String roomName : rooms) {
-                          options.add(roomName);
-                      }
+
                       String selection = new UiBooster().showSelectionDialog(
                                                                     "Select receiver:",
                                                                     "Destination",
-                                                                    options
+                                                                    this.receiverOptions
                                                                     );
             if(selection != null) currentReceiver = selection;
 
@@ -91,9 +94,14 @@ class GUI {
                   BUTTON_WIDTH, 
                   BUTTON_HEIGHT)){
 
-            controller.command(Scenario.instance().mom, 
-                               Scenario.instance().beer, 
-                               Scenario.instance().baby);
+            println("current requester: "+this.currentRequester);
+            println("current target: "+this.currentTarget);
+            println("current rec: "+this.currentReceiver);
+            
+
+            controller.command(Scenario.instance().characters.get(this.currentRequester), 
+                               Scenario.instance().items.get(this.currentTarget), 
+                               Scenario.instance().characters.get(this.currentReceiver));
         };
 
         

@@ -39,6 +39,11 @@ class Controller {
         this.item = item;
         this.fetchRoom = getRoomItemIsIn(item);
         this.receiver = receiver;
+        println("command called with");
+        println(requester);
+        println(item);
+        println(receiver);
+
         println("COMMAND: "+"["+requester.name+"] asks the robot to bring ["+item.name+"] to ["+receiver.name+"]");
 
         if(receiver instanceof Room){
@@ -108,9 +113,11 @@ public void FetchProcedureAsync(){
 
     private Room getRoomItemIsIn(Item item){
         // finds the room an item is in and returns it
-        for (int i = 0; i < scene.rooms.length; i++) {
-            if(scene.rooms[i].items.contains(item)){
-                return scene.rooms[i];
+
+        for(Room room : scene.rooms.values()){
+            if (room.items.contains(item)){
+                println("Found item "+item.name+" in room: "+room.name);
+                return room;
             }
         }
         print("Cannot find item! Is it not placed in a room?");
@@ -119,12 +126,13 @@ public void FetchProcedureAsync(){
 
     private Room getRoomCharacterIsIn(Character chara){
         // finds the room an item is in and returns it
-        for (int i = 0; i < scene.rooms.length; i++) {
-            if(scene.rooms[i].characters.contains(chara)){
-                println("Found "+chara.name+" in room: "+scene.rooms[i].name);
-                return scene.rooms[i];
+
+        for(Room room : scene.rooms.values()) {
+            if(room.characters.contains(chara)){
+                println("Found "+chara.name+" in room: "+room.name);
+                return room;
             }
-        }
+        }        
         print("Cannot find character! Do they exist or are they not in the apartment?");
         return new Room("CHARACTER_NOT_FOUND","",0,0);
     }
@@ -225,11 +233,11 @@ public void FetchProcedureAsync(){
     }
 
     private Room getCurrentRobotRoom(){
-        for (int i = 0; i < scene.rooms.length; i++) {
-            if(scene.rooms[i].characters.contains(robot)){
-                return scene.rooms[i];
+        for(Room room : scene.rooms.values()){
+            if(room.characters.contains(robot)){
+                return room;
             }
-        }
+        }        
         println("ERROR: CANNOT FIND ROBOT! Has it not been placed in a room, or does Scenario.java not have a reference to the Room?");
         return new Room("ROBOT_NOT_FOUND","",0,0); // a bit hacky lol
     }
