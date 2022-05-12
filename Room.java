@@ -80,9 +80,9 @@ class Room extends Entity
     
     // place items
     int yPosItem = -1;
-    for (int i = 0; i < items.size(); i++) {
+    for (int i = 0; i < this.items.size(); i++) {
       if(i%6 == 0) yPosItem++;
-      items.get(i).getImage(papplet, 
+      this.items.get(i).getImage(papplet, 
                             this._x * this.width + ((i % 6) * 60) + this.iconPadding, 
                             this._y * this.width + yPosItem * 60 + this.iconPadding, 
                             this.iconSize, 
