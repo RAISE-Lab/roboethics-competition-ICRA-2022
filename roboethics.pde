@@ -13,6 +13,9 @@ void setup(){
   Scenario scene = Scenario.instance();
   gui = new GUI();
 
+  Test test = new Test();
+  test.hi();
+
   for (Room room : scene.rooms.values()) {
     room.init(this);
   }
