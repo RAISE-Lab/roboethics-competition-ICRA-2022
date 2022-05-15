@@ -44,7 +44,7 @@ class Room extends Entity
     room.addConnection(this);
   }
   
-  protected void addCharacter(Character chara){
+  protected void addCharacter(Character chara){    
     this.characters.add(chara);
   }
 
@@ -95,5 +95,6 @@ class Room extends Entity
       characters.get(i).update(papplet);
     }
     papplet.tint(255, 255);
+
   }
 }
