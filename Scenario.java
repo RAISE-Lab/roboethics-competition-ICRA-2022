@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 
+import javax.swing.text.html.parser.Entity;
+
 class Scenario {
 
    // -----------------------------------------------------------\\
@@ -58,7 +60,14 @@ class Scenario {
         put("Diary",       new Item("Diary", "assets/items/diary.png")); 
 
     }};
- 
+
+    // public static HashMap<String, Entity> destinations = new HashMap(){{
+    //     putAll(characters);
+    //     putAll(rooms);
+    // }};
+    
+    public static HashMap<String, Entity> destinations = new HashMap();
+    
     
     private Scenario(){
 
@@ -87,7 +96,6 @@ class Scenario {
         rooms.get("Common Space").addItem(items.get("Credit Card"));
         rooms.get("Bedroom 1")   .addItem(items.get("Wallet"));
         rooms.get("Washroom")    .addItem(items.get("Beer"));       
-
     }
 
     public Character getRobot(){
