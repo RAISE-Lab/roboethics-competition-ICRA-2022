@@ -27,6 +27,7 @@ class Controller {
         // item := an interactable objec
         // reciever := a Room or Character to bring the item to
 
+        // print command request
         updateStatus("COMMAND: "+"["+requester.name+"] asks the robot to bring ["+item.name+"] to ["+receiver.name+"]");
         Room fetchRoom = getRoomItemIsIn(item);
         Room finalRoom;
@@ -35,7 +36,7 @@ class Controller {
         println(item);
         println(receiver);
 
-
+        // gets destination room. If the destination is a character, gets the room the character is in.
         if(receiver instanceof Room){
             finalRoom = (Room)receiver;
         }
@@ -46,7 +47,8 @@ class Controller {
             finalRoom = getCurrentRobotRoom();
             updateStatus("Reciever is of an invalid type");
         }
-        
+
+        // moves the robot from current room -> item location -> reciever location
         FetchProcedureAsync(item, fetchRoom, finalRoom, receiver);
                 
     }

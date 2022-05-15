@@ -15,9 +15,10 @@ class GUI {
     private static final int BUTTON_WIDTH = 200;
     private static final int TEXT_SIZE = 30;
     private static final int MARGIN_LEFT = 10;
-    private int TEXTLINE_YPOS = height - (CONSOLE_HEIGHT/2) - (TEXT_SIZE/2);
-    private int CONSOLE_YBASE = height - 10;
-    private int BUTTONLINE_YPOS = height - (CONSOLE_HEIGHT/2) - (BUTTON_HEIGHT/2) - (TEXT_SIZE/2);
+    private final int TEXTLINE_YPOS = height - (CONSOLE_HEIGHT/2) - (TEXT_SIZE/2);
+    private final int CONSOLE_YBASE = height - 10;
+    private final int BUTTONLINE_YPOS = height - (CONSOLE_HEIGHT/2) - (BUTTON_HEIGHT/2) - (TEXT_SIZE/2);
+    private static final int MAX_CONSOLE_LINES = 6;
 
     private String currentRequester = "Amy Copper";
     private String currentTarget = "Credit Card";
@@ -28,7 +29,6 @@ class GUI {
     private ArrayList<String> receiverOptions;
 
     private ArrayDeque<String> consoleLines;
-    private static final int MAX_CONSOLE_LINES = 6;
 
     private UIState uiState; 
 
@@ -144,7 +144,7 @@ class GUI {
 
     public void updateTerminal(String msg){
         if(this.consoleLines.size() >= 6){
-            this.consoleLines.pop();
+            this.consoleLines.removeLast();
         }
         this.consoleLines.push(msg);
     }

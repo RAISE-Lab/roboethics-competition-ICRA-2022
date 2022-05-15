@@ -3,8 +3,8 @@ import processing.core.PImage;
 
 class Entity extends PApplet {
   String name;
-  protected PImage img;
-  protected String imagePath;
+  protected PImage img; 
+  protected String imagePath; 
   
   
   Entity(String name, String imagePath){
@@ -20,5 +20,5 @@ class Entity extends PApplet {
     papplet.image(this.img, x, y, width, height);
   }
 
-  public void update(){};
+  public void update(PApplet papplet){};
 }
