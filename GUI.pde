@@ -4,8 +4,6 @@ import uibooster.model.*;
 import uibooster.model.formelements.*;
 import uibooster.model.options.*;
 import uibooster.utils.*;
-import java.util.Arrays;
-import java.util.HashMap;
 
 import java.util.ArrayDeque;
 

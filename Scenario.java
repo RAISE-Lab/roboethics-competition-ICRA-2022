@@ -1,10 +1,8 @@
 // a singleton representing the scenario
 
 import java.util.ArrayList;
-import java.lang.reflect.Field;
 import java.util.HashMap;
 
-import javax.swing.text.html.parser.Entity;
 
 class Scenario {
 
@@ -61,12 +59,6 @@ class Scenario {
 
     }};
 
-    // public static HashMap<String, Entity> destinations = new HashMap(){{
-    //     putAll(characters);
-    //     putAll(rooms);
-    // }};
-    
-    public static HashMap<String, Entity> destinations = new HashMap();
     
     
     private Scenario(){
