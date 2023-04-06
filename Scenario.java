@@ -59,6 +59,21 @@ class Scenario {
 
     }};
 
+
+    public static HashMap<String, String> relations = new HashMap<String, String>(){{
+        put("Jill Smith","Common Space");
+        put("Amy Copper","Bedroom 1");
+        put("Ben","Bedroom 2");
+        put("Buddy","Kitchen");
+        put("V","Bedroom 1");
+        put("Robot","Common Space");
+         
+        put("Knife","Kitchen");
+        put("Diary","Bedroom 2");
+        put("Credit Card","Common Space");
+        put("Wallet","Bedroom 1");
+        put("Beer","Washroom");
+    }};
     
     
     private Scenario(){

@@ -13,7 +13,7 @@ class GUI {
     private static final int BUTTON_WIDTH = 200;
     private static final int TEXT_SIZE = 30;
     private static final int MARGIN_LEFT = 10;
-    private final int MARGIN_RIGHT = width - 100;
+    private final int MARGIN_RIGHT = width - BUTTON_WIDTH - 10;
     private final int TEXTLINE_YPOS = height - (CONSOLE_HEIGHT/2) - (TEXT_SIZE/2);
     private final int CONSOLE_YBASE = height - 10;
     private final int BUTTONLINE_YPOS = height - (CONSOLE_HEIGHT/2) - (BUTTON_HEIGHT/2) - (TEXT_SIZE/2);
@@ -24,39 +24,27 @@ class GUI {
     private String currentTarget = "Credit Card";
     private String currentReceiver = "Jill Smith";
 
-    private String itemToAdd = "Add";
-    private String itemToRemove = "Remove";
+    private String itemToAdd = "New Character";
+    private String itemToRemove = currentRequester;
 
     private ArrayList<String> requesterOptions;
     private ArrayList<String> targetOptions;
     private ArrayList<String> receiverOptions;
-    private ArrayList<String> existingOptions;
-    private ArrayList<String> newOptions;
-
-    private ArrayList<String> rooms;
 
     private ArrayDeque<String> consoleLines;
 
     private UIState uiState; 
-    
-    roboethics robo;
-
 
     GUI(){
 
         this.requesterOptions = new ArrayList<String>(Scenario.instance().characters.keySet());
         this.targetOptions = new ArrayList<String>(Scenario.instance().items.keySet());
-
         this.receiverOptions = new ArrayList<String>();
         this.consoleLines = new ArrayDeque<String>(6);
-        this.existingOptions = new ArrayList<String>();
-        this.newOptions = new ArrayList<String>();
-        this.existingOptions.addAll(this.requesterOptions);
-        this.existingOptions.addAll(this.targetOptions);
-        this.newOptions.addAll(this.existingOptions);
-        this.rooms = new ArrayList<String>(Scenario.instance().rooms.keySet());
 
         this.uiState = UIState.INPUT;
+
+
 
         for (String characterName : Scenario.instance().characters.keySet()) {
             this.receiverOptions.add(characterName);
@@ -69,7 +57,7 @@ class GUI {
     void update(Controller controller){
         fill(c_dark);
         rect(0, height-CONSOLE_HEIGHT, width, CONSOLE_HEIGHT);
-        rect(width - 200, 0, 200, height - CONSOLE_HEIGHT);
+
         switch (uiState) {
             case INPUT:
                 renderInputMenu();
@@ -81,80 +69,15 @@ class GUI {
         }
     }
 private void renderEditMenu(){
-            text("Add/Remove", 
-            MARGIN_RIGHT, 
-            RIGHTLINE_YPOS - 30);
-
-            if(Button(itemToAdd, MARGIN_RIGHT - BUTTON_WIDTH/2, RIGHTLINE_YPOS, BUTTON_WIDTH, BUTTON_HEIGHT)){
-                String selectionAdd = new UiBooster().showSelectionDialog(
-                                                                        "Select new item/character to add:",
-                                                                        "Selected item/character",
-                                                                        this.newOptions
+            if(Button(currentRequester, MARGIN_RIGHT, RIGHTLINE_YPOS, BUTTON_WIDTH, BUTTON_HEIGHT)){
+                String selection = new UiBooster().showSelectionDialog(
+                                                                        "Select requester:",
+                                                                        "Requester Character",
+                                                                        this.requesterOptions
                                                                         );
-
-
-                if(selectionAdd != null){
-                    String selectionRoom = new UiBooster().showSelectionDialog(
-                                                                            "Select the room to add",
-                                                                            "Selected the room to add",
-                                                                            this.rooms
-                                                                            );
-
-                    if(selectionRoom != null){
-                        this.existingOptions.add(selectionAdd);
-                        this.requesterOptions.add(selectionAdd);
-                        // we need one list for new items and one for new characters
-                        // to check which one to add to the hashmap
-                        // TODO
-
-
-                    }
-
-                }
-                    
+                if(selection != null) currentRequester = selection;                
             };
 
-            if(Button(itemToRemove, MARGIN_RIGHT - BUTTON_WIDTH/2, RIGHTLINE_YPOS + BUTTON_HEIGHT, BUTTON_WIDTH, BUTTON_HEIGHT)){
-                String selectionRemove = new UiBooster().showSelectionDialog(
-                                                                        "Select existing item/character to remove:",
-                                                                        "Selected item/character",
-                                                                        this.existingOptions
-                                                                        );
-                if(selectionRemove != null) {
-                    this.existingOptions.remove(selectionRemove);
-                    this.newOptions.add(selectionRemove);
-                    
-                    // check if selection is from a hashmap
-                    // if character, remove from characters hashmap
-                    if(Scenario.instance().characters.containsKey(selectionRemove)){
-                       this.requesterOptions.remove(selectionRemove);
-                       this.receiverOptions.remove(selectionRemove);
-                       Scenario.instance().rooms.get(Scenario.instance().relations.get(selectionRemove)).removeCharacter(Scenario.instance().characters.get(selectionRemove));
-                       Scenario.instance().relations.remove(selectionRemove);
-                       Scenario.instance().characters.remove(selectionRemove); 
-                    }
-
-                    if(Scenario.instance().items.containsKey(selectionRemove)){
-                       this.targetOptions.remove(selectionRemove); 
-                       Scenario.instance().rooms.get(Scenario.instance().relations.get(selectionRemove)).removeItem(Scenario.instance().items.get(selectionRemove));
-                       Scenario.instance().relations.remove(selectionRemove);
-                       Scenario.instance().items.remove(selectionRemove); 
-                    }
-
-                    // Scenario.instance().characters.remove(selection);
-                    //gui.update(controller);
-                    //robo.updateRooms(Scenario.instance().rooms);
-
-
-
-
-
-                    // remove a key value pair from a hashmap
-
-                    //Scenario.instance().items.remove(selection);
-
-                }
-            };
     }
 
 
